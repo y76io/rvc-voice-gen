@@ -45,3 +45,8 @@ beautifulsoup4
 flask
 
 pedalboard
+
+# additions
+uvicorn
+fastapi
+firebase-admin
