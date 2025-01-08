@@ -1,0 +1,567 @@
+INFO:     Started server process [733884]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:voice_cloning_service:Model parameters:
+                Project ID: BG_Project_Test
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_BG_Project_Test_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_3f69d97b77b64ac7a0eb671bdb6927e9.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_BG_Project_Test_en_SPEAKER_00/temp_3f69d97b77b64ac7a0eb671bdb6927e9.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_BG_Project_Test_en_SPEAKER_00/temp_3f69d97b77b64ac7a0eb671bdb6927e9.wav
+INFO:voice_cloning_service:Received inference request: project_id='BG_Project_Test' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_BG_Project_Test_en_SPEAKER_00/temp_3f69d97b77b64ac7a0eb671bdb6927e9.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_BG_Project_Test_en_SPEAKER_00/temp_3f69d97b77b64ac7a0eb671bdb6927e9.wav'...
+Conversion completed at 'outputs/temp_3f69d97b77b64ac7a0eb671bdb6927e9_converted.wav' in 2.71 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_3f69d97b77b64ac7a0eb671bdb6927e9_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_3f69d97b77b64ac7a0eb671bdb6927e9_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_3f69d97b77b64ac7a0eb671bdb6927e9_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: BG_Project_Test/SPEAKER_00/es/20.19_20.51_SPEAKER_00_2025-01-02T17_20_32_234510.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/BG_Project_Test/SPEAKER_00/es/20.19_20.51_SPEAKER_00_2025-01-02T17_20_32_234510.wav, audio_length: 0.629, trimmed_start: 0.13, trimmed_end: 0.26
+Inference complete. Output file at: outputs/temp_3f69d97b77b64ac7a0eb671bdb6927e9_converted.wav
+INFO:     185.187.130.137:63676 - "POST /convert_voice HTTP/1.1" 200 OK
+/opt/conda/lib/python3.10/site-packages/google/cloud/firestore_v1/base_collection.py:302: UserWarning: Detected filter using positional arguments. Prefer using the 'filter' keyword argument instead.
+  return query.where(field_path, op_string, value)
+/home/bg_y76_io/Applio/server_db_v0.py:544: UserWarning: Detected filter using positional arguments. Prefer using the 'filter' keyword argument instead.
+  .where('speaker', '==', speaker.get('speaker'))
+INFO:voice_cloning_service:Received training request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_name='SPEAKER_00_en' audio_filenames=['98600.0_102090.0_SPEAKER_00.wav', '31400.0_32790.0_SPEAKER_00.wav', '73100.0_80000_SPEAKER_00.wav', '53300.0_63450.0_SPEAKER_00.wav', '5500.0_8760.0_SPEAKER_00.wav', '9500.0_14400.0_SPEAKER_00.wav', '94400.0_98550.0_SPEAKER_00.wav', '4300.0_5360.0_SPEAKER_00.wav', '64200.0_72430.0_SPEAKER_00.wav', '104600.0_106170.0_SPEAKER_00.wav', '81100.0_85970.0_SPEAKER_00.wav', '2300.0_4010.0_SPEAKER_00.wav', '14400.0_15940.0_SPEAKER_00.wav', '47600.0_52580.0_SPEAKER_00.wav', '106300.0_106570.0_SPEAKER_00.wav', '87820.0_93080.0_SPEAKER_00.wav', '33400.0_46900.0_SPEAKER_00.wav', '86100.0_87770.0_SPEAKER_00.wav', '600.0_1930.0_SPEAKER_00.wav', '102500.0_104590.0_SPEAKER_00.wav', '16800.0_30600.0_SPEAKER_00.wav'] callback_url='https://y76-backend-dev-890718153427.us-central1.run.app/api/services/rvctrainingcallback' dataset_sample_rate=40000 preprocess_cpu_cores=2 cut_preprocess=True process_effects=False noise_reduction=False noise_reduction_strength=0.7 rvc_version='v2' f0_method='rmvpe' hop_length=128 extract_cpu_cores=2 extract_gpu=0 embedder_model='contentvec' embedder_model_custom='' total_epoch=50 batch_size=15 gpu=0 pretrained=True custom_pretrained=False g_pretrained_path='' d_pretrained_path='' overtraining_detector=False overtraining_threshold=50 cleanup=False cache_data_in_gpu=False save_every_epoch=10 save_only_latest=False save_every_weights=False index_algorithm='Auto'
+INFO:voice_cloning_service:Creating dataset directory at: data/Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:
+        Starting download of 21 files:
+        Project ID: Lex_Opp_Intro
+        Language: en
+        Character: SPEAKER_00
+        First few filenames: ['98600.0_102090.0_SPEAKER_00.wav', '31400.0_32790.0_SPEAKER_00.wav', '73100.0_80000_SPEAKER_00.wav']
+        Target directory: data/Lex_Opp_Intro_en_SPEAKER_00
+        
+INFO:voice_cloning_service:Downloading file 1/21: 98600.0_102090.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/98600.0_102090.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/98600.0_102090.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/98600.0_102090.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 2/21: 31400.0_32790.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/31400.0_32790.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/31400.0_32790.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/31400.0_32790.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 3/21: 73100.0_80000_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/73100.0_80000_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/73100.0_80000_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/73100.0_80000_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 4/21: 53300.0_63450.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/53300.0_63450.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/53300.0_63450.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/53300.0_63450.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 5/21: 5500.0_8760.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/5500.0_8760.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/5500.0_8760.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/5500.0_8760.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 6/21: 9500.0_14400.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/9500.0_14400.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/9500.0_14400.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/9500.0_14400.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 7/21: 94400.0_98550.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/94400.0_98550.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/94400.0_98550.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/94400.0_98550.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 8/21: 4300.0_5360.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/4300.0_5360.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/4300.0_5360.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/4300.0_5360.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 9/21: 64200.0_72430.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/64200.0_72430.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/64200.0_72430.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/64200.0_72430.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 10/21: 104600.0_106170.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/104600.0_106170.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/104600.0_106170.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/104600.0_106170.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 11/21: 81100.0_85970.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/81100.0_85970.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/81100.0_85970.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/81100.0_85970.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 12/21: 2300.0_4010.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/2300.0_4010.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/2300.0_4010.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/2300.0_4010.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 13/21: 14400.0_15940.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/14400.0_15940.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/14400.0_15940.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/14400.0_15940.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 14/21: 47600.0_52580.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/47600.0_52580.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/47600.0_52580.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/47600.0_52580.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 15/21: 106300.0_106570.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/106300.0_106570.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/106300.0_106570.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/106300.0_106570.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 16/21: 87820.0_93080.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/87820.0_93080.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/87820.0_93080.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/87820.0_93080.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 17/21: 33400.0_46900.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/33400.0_46900.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/33400.0_46900.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/33400.0_46900.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 18/21: 86100.0_87770.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/86100.0_87770.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/86100.0_87770.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/86100.0_87770.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 19/21: 600.0_1930.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/600.0_1930.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/600.0_1930.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/600.0_1930.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 20/21: 102500.0_104590.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/102500.0_104590.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/102500.0_104590.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/102500.0_104590.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Downloading file 21/21: 16800.0_30600.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Built audio path: Lex_Opp_Intro/en/SPEAKER_00/16800.0_30600.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to download from blob path: Lex_Opp_Intro/en/SPEAKER_00/16800.0_30600.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Attempting to save to local path: data/Lex_Opp_Intro_en_SPEAKER_00/16800.0_30600.0_SPEAKER_00.wav
+INFO:voice_cloning_service:Checking if blob exists: True
+INFO:voice_cloning_service:Successfully downloaded 21 audio files to data/Lex_Opp_Intro_en_SPEAKER_00
+Received training request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_name='SPEAKER_00_en' audio_filenames=['98600.0_102090.0_SPEAKER_00.wav', '31400.0_32790.0_SPEAKER_00.wav', '73100.0_80000_SPEAKER_00.wav', '53300.0_63450.0_SPEAKER_00.wav', '5500.0_8760.0_SPEAKER_00.wav', '9500.0_14400.0_SPEAKER_00.wav', '94400.0_98550.0_SPEAKER_00.wav', '4300.0_5360.0_SPEAKER_00.wav', '64200.0_72430.0_SPEAKER_00.wav', '104600.0_106170.0_SPEAKER_00.wav', '81100.0_85970.0_SPEAKER_00.wav', '2300.0_4010.0_SPEAKER_00.wav', '14400.0_15940.0_SPEAKER_00.wav', '47600.0_52580.0_SPEAKER_00.wav', '106300.0_106570.0_SPEAKER_00.wav', '87820.0_93080.0_SPEAKER_00.wav', '33400.0_46900.0_SPEAKER_00.wav', '86100.0_87770.0_SPEAKER_00.wav', '600.0_1930.0_SPEAKER_00.wav', '102500.0_104590.0_SPEAKER_00.wav', '16800.0_30600.0_SPEAKER_00.wav'] callback_url='https://y76-backend-dev-890718153427.us-central1.run.app/api/services/rvctrainingcallback' dataset_sample_rate=40000 preprocess_cpu_cores=2 cut_preprocess=True process_effects=False noise_reduction=False noise_reduction_strength=0.7 rvc_version='v2' f0_method='rmvpe' hop_length=128 extract_cpu_cores=2 extract_gpu=0 embedder_model='contentvec' embedder_model_custom='' total_epoch=50 batch_size=15 gpu=0 pretrained=True custom_pretrained=False g_pretrained_path='' d_pretrained_path='' overtraining_detector=False overtraining_threshold=50 cleanup=False cache_data_in_gpu=False save_every_epoch=10 save_only_latest=False save_every_weights=False index_algorithm='Auto'
+Debug - Request details:
+Project ID: Lex_Opp_Intro
+Language: en
+Character: SPEAKER_00
+Audio filenames type: <class 'list'>
+Audio filenames: ['98600.0_102090.0_SPEAKER_00.wav', '31400.0_32790.0_SPEAKER_00.wav', '73100.0_80000_SPEAKER_00.wav', '53300.0_63450.0_SPEAKER_00.wav', '5500.0_8760.0_SPEAKER_00.wav', '9500.0_14400.0_SPEAKER_00.wav', '94400.0_98550.0_SPEAKER_00.wav', '4300.0_5360.0_SPEAKER_00.wav', '64200.0_72430.0_SPEAKER_00.wav', '104600.0_106170.0_SPEAKER_00.wav', '81100.0_85970.0_SPEAKER_00.wav', '2300.0_4010.0_SPEAKER_00.wav', '14400.0_15940.0_SPEAKER_00.wav', '47600.0_52580.0_SPEAKER_00.wav', '106300.0_106570.0_SPEAKER_00.wav', '87820.0_93080.0_SPEAKER_00.wav', '33400.0_46900.0_SPEAKER_00.wav', '86100.0_87770.0_SPEAKER_00.wav', '600.0_1930.0_SPEAKER_00.wav', '102500.0_104590.0_SPEAKER_00.wav', '16800.0_30600.0_SPEAKER_00.wav']
+INFO:     185.187.130.137:63823 - "POST /train-from-firestore/Hw5Q1N26GqBecGaERSQ7?callback_url=https%3A%2F%2Fy76-backend-dev-890718153427.us-central1.run.app%2Fapi%2Fservices%2Frvctrainingcallback HTTP/1.1" 200 OK
+Starting preprocess with 2 processes...
+Dataset directory:  data/Lex_Opp_Intro_en_SPEAKER_00
+  0%|          | 0/21 [00:00<?, ?it/s]  5%|▍         | 1/21 [00:00<00:18,  1.06it/s] 10%|▉         | 2/21 [00:01<00:12,  1.55it/s] 19%|█▉        | 4/21 [00:01<00:04,  3.45it/s] 33%|███▎      | 7/21 [00:01<00:02,  6.75it/s] 43%|████▎     | 9/21 [00:01<00:01,  7.62it/s] 52%|█████▏    | 11/21 [00:01<00:01,  9.47it/s] 62%|██████▏   | 13/21 [00:02<00:00, 10.17it/s] 76%|███████▌  | 16/21 [00:02<00:00, 11.71it/s] 86%|████████▌ | 18/21 [00:02<00:00, 11.30it/s] 95%|█████████▌| 20/21 [00:02<00:00, 11.14it/s]100%|██████████| 21/21 [00:02<00:00,  7.50it/s]
+Preprocess completed in 2.80 seconds on 00:01:36 seconds of audio.
+Starting pitch extraction with 2 cores on cuda:0 using rmvpe...
+  0%|          | 0/62 [00:00<?, ?it/s] 10%|▉         | 6/62 [00:00<00:03, 15.41it/s] 24%|██▍       | 15/62 [00:00<00:01, 32.94it/s] 42%|████▏     | 26/62 [00:00<00:00, 50.96it/s] 73%|███████▎  | 45/62 [00:00<00:00, 84.76it/s] 90%|█████████ | 56/62 [00:00<00:00, 84.63it/s]100%|██████████| 62/62 [00:00<00:00, 65.21it/s]
+Pitch extraction completed in 5.87 seconds.
+Starting embedding extraction with 2 cores on cuda:0...
+  0%|          | 0/62 [00:00<?, ?it/s] 10%|▉         | 6/62 [00:00<00:03, 16.08it/s] 37%|███▋      | 23/62 [00:00<00:00, 57.59it/s] 77%|███████▋  | 48/62 [00:00<00:00, 109.28it/s]100%|██████████| 62/62 [00:00<00:00, 92.78it/s] 
+Embedding extraction completed in 4.93 seconds.
+Starting training...
+Loaded checkpoint '/home/bg_y76_io/Applio/logs/SPEAKER_00_en/D_200.pth' (epoch 50)
+Loaded checkpoint '/home/bg_y76_io/Applio/logs/SPEAKER_00_en/G_200.pth' (epoch 50)
+INFO:voice_cloning_service:Uploaded model SPEAKER_00_en (en_2025_01_02) to cloud storage.
+INFO:root:upload model_path: en/SPEAKER_00/en_2025_01_02/SPEAKER_00_en, project_id: Lex_Opp_Intro, character: SPEAKER_00
+/opt/conda/lib/python3.10/site-packages/google/cloud/firestore_v1/base_collection.py:302: UserWarning: Detected filter using positional arguments. Prefer using the 'filter' keyword argument instead.
+  return query.where(field_path, op_string, value)
+INFO:voice_cloning_service:Updated Firestore with model path: en/SPEAKER_00/en_2025_01_02/SPEAKER_00_en for character: SPEAKER_00
+Preprocessing complete.
+Feature extraction complete.
+Training complete.
+Index creation complete.
+INFO:     106.75.186.101:60648 - "POST /token HTTP/1.1" 404 Not Found
+INFO:     185.226.197.48:50491 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     198.235.24.75:60854 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     206.168.34.204:59198 - "GET / HTTP/1.1" 404 Not Found
+INFO:     206.168.34.204:40854 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     198.235.24.128:57904 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     206.168.34.71:50920 - "GET / HTTP/1.1" 404 Not Found
+INFO:     206.168.34.71:36728 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     64.62.197.162:37335 - "GET / HTTP/1.1" 404 Not Found
+INFO:     64.62.197.155:34823 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     198.235.24.129:54422 - "GET / HTTP/1.0" 404 Not Found
+INFO:     207.154.209.46:4131 - "GET / HTTP/1.0" 404 Not Found
+INFO:     161.35.201.177:2372 - "GET /solr/admin/info/system HTTP/1.1" 404 Not Found
+INFO:     167.71.34.150:41380 - "GET /cgi-bin/authLogin.cgi HTTP/1.1" 404 Not Found
+INFO:     207.154.227.200:32722 - "GET /query?q=SHOW+DIAGNOSTICS HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     178.128.198.227:16214 - "GET / HTTP/1.1" 404 Not Found
+INFO:     161.35.201.177:2374 - "GET /solr/admin/cores?action=STATUS&wt=json HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     46.101.218.194:33110 - "GET /v2/_catalog HTTP/1.1" 404 Not Found
+INFO:     198.235.24.119:49785 - "GET / HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     167.94.145.110:33406 - "GET / HTTP/1.1" 404 Not Found
+INFO:     167.94.145.110:52128 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     162.142.125.38:55712 - "GET / HTTP/1.1" 404 Not Found
+INFO:     162.142.125.38:35104 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     206.168.34.206:59208 - "GET / HTTP/1.1" 404 Not Found
+INFO:     206.168.34.206:46724 - "GET / HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [733884]
+INFO:     Started server process [4874]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_SampleA
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_SampleA_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_604567f24e184ff2a1f0e6cdcfa3b411.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_SampleA_en_SPEAKER_00/temp_604567f24e184ff2a1f0e6cdcfa3b411.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_SampleA_en_SPEAKER_00/temp_604567f24e184ff2a1f0e6cdcfa3b411.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_SampleA' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_SampleA_en_SPEAKER_00/temp_604567f24e184ff2a1f0e6cdcfa3b411.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_SampleA_en_SPEAKER_00/temp_604567f24e184ff2a1f0e6cdcfa3b411.wav'...
+Conversion completed at 'outputs/temp_604567f24e184ff2a1f0e6cdcfa3b411_converted.wav' in 7.21 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_604567f24e184ff2a1f0e6cdcfa3b411_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_604567f24e184ff2a1f0e6cdcfa3b411_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_604567f24e184ff2a1f0e6cdcfa3b411_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_SampleA/SPEAKER_00/es/21.1_22.06_SPEAKER_00_2025-01-04T05_15_12_102213.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_SampleA/SPEAKER_00/es/21.1_22.06_SPEAKER_00_2025-01-04T05_15_12_102213.wav, audio_length: 0.892, trimmed_start: 0.13, trimmed_end: 0.18
+Inference complete. Output file at: outputs/temp_604567f24e184ff2a1f0e6cdcfa3b411_converted.wav
+INFO:     34.96.44.155:51796 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_8ed62b1b9d754ccaa18fb96c7e775380.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_8ed62b1b9d754ccaa18fb96c7e775380.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_8ed62b1b9d754ccaa18fb96c7e775380.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_8ed62b1b9d754ccaa18fb96c7e775380.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_8ed62b1b9d754ccaa18fb96c7e775380.wav'...
+Conversion completed at 'outputs/temp_8ed62b1b9d754ccaa18fb96c7e775380_converted.wav' in 2.60 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_8ed62b1b9d754ccaa18fb96c7e775380_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_8ed62b1b9d754ccaa18fb96c7e775380_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_8ed62b1b9d754ccaa18fb96c7e775380_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/0.6_1.93_SPEAKER_00_2025-01-04T05_15_47_527896.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/0.6_1.93_SPEAKER_00_2025-01-04T05_15_47_527896.wav, audio_length: 1.35, trimmed_start: 0.11, trimmed_end: 0.16
+Inference complete. Output file at: outputs/temp_8ed62b1b9d754ccaa18fb96c7e775380_converted.wav
+INFO:     34.96.44.155:5686 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_a9a28e3a021f43c9b18c26922b3a93d1.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_a9a28e3a021f43c9b18c26922b3a93d1.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_a9a28e3a021f43c9b18c26922b3a93d1.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_a9a28e3a021f43c9b18c26922b3a93d1.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_a9a28e3a021f43c9b18c26922b3a93d1.wav'...
+Conversion completed at 'outputs/temp_a9a28e3a021f43c9b18c26922b3a93d1_converted.wav' in 2.73 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_a9a28e3a021f43c9b18c26922b3a93d1_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_a9a28e3a021f43c9b18c26922b3a93d1_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_a9a28e3a021f43c9b18c26922b3a93d1_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_26_338564.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_26_338564.wav, audio_length: 0.567, trimmed_start: 0.11, trimmed_end: 0.29
+Inference complete. Output file at: outputs/temp_a9a28e3a021f43c9b18c26922b3a93d1_converted.wav
+INFO:     34.96.44.155:46780 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_cfc992e068f743de9f2e866ac1f54873.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_cfc992e068f743de9f2e866ac1f54873.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_cfc992e068f743de9f2e866ac1f54873.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_cfc992e068f743de9f2e866ac1f54873.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_cfc992e068f743de9f2e866ac1f54873.wav'...
+Conversion completed at 'outputs/temp_cfc992e068f743de9f2e866ac1f54873_converted.wav' in 2.56 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_cfc992e068f743de9f2e866ac1f54873_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_cfc992e068f743de9f2e866ac1f54873_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_cfc992e068f743de9f2e866ac1f54873_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_42_161436.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_42_161436.wav, audio_length: 0.397, trimmed_start: 0.13, trimmed_end: 0.44
+Inference complete. Output file at: outputs/temp_cfc992e068f743de9f2e866ac1f54873_converted.wav
+INFO:     34.96.44.155:8077 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_16ea3efc944f42d194722546c04f18a7.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_16ea3efc944f42d194722546c04f18a7.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_16ea3efc944f42d194722546c04f18a7.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_16ea3efc944f42d194722546c04f18a7.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_16ea3efc944f42d194722546c04f18a7.wav'...
+Conversion completed at 'outputs/temp_16ea3efc944f42d194722546c04f18a7_converted.wav' in 2.58 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_16ea3efc944f42d194722546c04f18a7_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_16ea3efc944f42d194722546c04f18a7_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_16ea3efc944f42d194722546c04f18a7_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_58_155104.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_17_58_155104.wav, audio_length: 0.567, trimmed_start: 0.11, trimmed_end: 0.29
+Inference complete. Output file at: outputs/temp_16ea3efc944f42d194722546c04f18a7_converted.wav
+INFO:     34.96.44.155:9719 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_3f6f0363e94447628a9b5e19bf59a5e3.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_3f6f0363e94447628a9b5e19bf59a5e3.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_3f6f0363e94447628a9b5e19bf59a5e3.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_3f6f0363e94447628a9b5e19bf59a5e3.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_3f6f0363e94447628a9b5e19bf59a5e3.wav'...
+Conversion completed at 'outputs/temp_3f6f0363e94447628a9b5e19bf59a5e3_converted.wav' in 2.57 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_3f6f0363e94447628a9b5e19bf59a5e3_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_3f6f0363e94447628a9b5e19bf59a5e3_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_3f6f0363e94447628a9b5e19bf59a5e3_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_16_129905.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_16_129905.wav, audio_length: 0.887, trimmed_start: 0.11, trimmed_end: 0.1
+Inference complete. Output file at: outputs/temp_3f6f0363e94447628a9b5e19bf59a5e3_converted.wav
+INFO:     34.96.44.155:59983 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_f5d225c1dde44793bb1d3d4ccd0a2106.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_f5d225c1dde44793bb1d3d4ccd0a2106.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_f5d225c1dde44793bb1d3d4ccd0a2106.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_f5d225c1dde44793bb1d3d4ccd0a2106.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_f5d225c1dde44793bb1d3d4ccd0a2106.wav'...
+Conversion completed at 'outputs/temp_f5d225c1dde44793bb1d3d4ccd0a2106_converted.wav' in 2.59 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_f5d225c1dde44793bb1d3d4ccd0a2106_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_f5d225c1dde44793bb1d3d4ccd0a2106_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_f5d225c1dde44793bb1d3d4ccd0a2106_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_31_753491.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_31_753491.wav, audio_length: 0.539, trimmed_start: 0.11, trimmed_end: 0.37
+Inference complete. Output file at: outputs/temp_f5d225c1dde44793bb1d3d4ccd0a2106_converted.wav
+INFO:     34.96.44.155:17627 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_1058f1b8b3cc4531bb03f3ea911b3af1.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_1058f1b8b3cc4531bb03f3ea911b3af1.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_1058f1b8b3cc4531bb03f3ea911b3af1.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_1058f1b8b3cc4531bb03f3ea911b3af1.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_1058f1b8b3cc4531bb03f3ea911b3af1.wav'...
+Conversion completed at 'outputs/temp_1058f1b8b3cc4531bb03f3ea911b3af1_converted.wav' in 2.64 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_1058f1b8b3cc4531bb03f3ea911b3af1_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_1058f1b8b3cc4531bb03f3ea911b3af1_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_1058f1b8b3cc4531bb03f3ea911b3af1_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_47_665357.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/106.3_106.57_SPEAKER_00_2025-01-04T05_18_47_665357.wav, audio_length: 0.529, trimmed_start: 0.12, trimmed_end: 0.37
+Inference complete. Output file at: outputs/temp_1058f1b8b3cc4531bb03f3ea911b3af1_converted.wav
+INFO:     34.96.44.155:8900 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_28538e85120e48479e7902b1737d06bf.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_28538e85120e48479e7902b1737d06bf.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_28538e85120e48479e7902b1737d06bf.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_28538e85120e48479e7902b1737d06bf.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_28538e85120e48479e7902b1737d06bf.wav'...
+Conversion completed at 'outputs/temp_28538e85120e48479e7902b1737d06bf_converted.wav' in 2.53 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_28538e85120e48479e7902b1737d06bf_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_28538e85120e48479e7902b1737d06bf_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_28538e85120e48479e7902b1737d06bf_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_19_29_757639.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_19_29_757639.wav, audio_length: 0.711, trimmed_start: 0.13, trimmed_end: 0.23
+Inference complete. Output file at: outputs/temp_28538e85120e48479e7902b1737d06bf_converted.wav
+INFO:     34.96.44.155:37327 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_acde93e43aad4c7aa2669f1b23d26c2b.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_acde93e43aad4c7aa2669f1b23d26c2b.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_acde93e43aad4c7aa2669f1b23d26c2b.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_acde93e43aad4c7aa2669f1b23d26c2b.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_acde93e43aad4c7aa2669f1b23d26c2b.wav'...
+Conversion completed at 'outputs/temp_acde93e43aad4c7aa2669f1b23d26c2b_converted.wav' in 2.51 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_acde93e43aad4c7aa2669f1b23d26c2b_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_acde93e43aad4c7aa2669f1b23d26c2b_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_acde93e43aad4c7aa2669f1b23d26c2b_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_19_45_541538.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_19_45_541538.wav, audio_length: 0.847, trimmed_start: 0.11, trimmed_end: 0.14
+Inference complete. Output file at: outputs/temp_acde93e43aad4c7aa2669f1b23d26c2b_converted.wav
+INFO:     34.96.44.155:46436 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_14c9c7452b02478cac80334dfebd6ac4.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_14c9c7452b02478cac80334dfebd6ac4.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_14c9c7452b02478cac80334dfebd6ac4.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_14c9c7452b02478cac80334dfebd6ac4.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_14c9c7452b02478cac80334dfebd6ac4.wav'...
+Conversion completed at 'outputs/temp_14c9c7452b02478cac80334dfebd6ac4_converted.wav' in 2.61 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_14c9c7452b02478cac80334dfebd6ac4_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_14c9c7452b02478cac80334dfebd6ac4_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_14c9c7452b02478cac80334dfebd6ac4_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_20_01_608194.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/zh/106.3_106.57_SPEAKER_00_2025-01-04T05_20_01_608194.wav, audio_length: 0.709, trimmed_start: 0.14, trimmed_end: 0.17
+Inference complete. Output file at: outputs/temp_14c9c7452b02478cac80334dfebd6ac4_converted.wav
+INFO:     34.96.44.155:19905 - "POST /convert_voice HTTP/1.1" 200 OK
+INFO:voice_cloning_service:Model parameters:
+                Project ID: Lex_Opp_Intro
+                Language: en
+                Character: SPEAKER_00
+                Model Name: SPEAKER_00_en
+                Model Version: en_2025_01_02
+                Weights File: SPEAKER_00_en
+            
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+INFO:voice_cloning_service:Checking model directory: logs/SPEAKER_00_en
+INFO:voice_cloning_service:Files found in model directory: [PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_20e_80s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831895.rvc.718468.0'), PosixPath('logs/SPEAKER_00_en/G_80.pth'), PosixPath('logs/SPEAKER_00_en/f0'), PosixPath('logs/SPEAKER_00_en/D_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735035424.rvc.36111.0'), PosixPath('logs/SPEAKER_00_en/D_120.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735838681.rvc.734785.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735827577.rvc.703470.0'), PosixPath('logs/SPEAKER_00_en/eval'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735828810.rvc.706758.0'), PosixPath('logs/SPEAKER_00_en/G_160.pth'), PosixPath('logs/SPEAKER_00_en/D_80.pth'), PosixPath('logs/SPEAKER_00_en/f0_voiced'), PosixPath('logs/SPEAKER_00_en/added_SPEAKER_00_en_v2.index'), PosixPath('logs/SPEAKER_00_en/model_info.json'), PosixPath('logs/SPEAKER_00_en/sliced_audios_16k'), PosixPath('logs/SPEAKER_00_en/filelist.txt'), PosixPath('logs/SPEAKER_00_en/G_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735817249.rvc.681031.0'), PosixPath('logs/SPEAKER_00_en/D_40.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829398.rvc.709482.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830571.rvc.713530.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830778.rvc.714533.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735830222.rvc.712167.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735832625.rvc.720757.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735829126.rvc.708260.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735831054.rvc.715758.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815797.rvc.676312.0'), PosixPath('logs/SPEAKER_00_en/v2_extracted'), PosixPath('logs/SPEAKER_00_en/config.json'), PosixPath('logs/SPEAKER_00_en/G_200.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735834774.rvc.726769.0'), PosixPath('logs/SPEAKER_00_en/sliced_audios'), PosixPath('logs/SPEAKER_00_en/G_120.pth'), PosixPath('logs/SPEAKER_00_en/SPEAKER_00_en_50e_200s.pth'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735544796.rvc.135511.0'), PosixPath('logs/SPEAKER_00_en/events.out.tfevents.1735815300.rvc.674313.0'), PosixPath('logs/SPEAKER_00_en/D_160.pth')]
+INFO:voice_cloning_service:Found all required model files in logs/SPEAKER_00_en
+INFO:voice_cloning_service:input_dir is data/infer_Lex_Opp_Intro_en_SPEAKER_00
+INFO:voice_cloning_service:random_name is temp_7ce8264688274854ad1205707aa1a8aa.wav
+INFO:voice_cloning_service:saved temp file to path data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_7ce8264688274854ad1205707aa1a8aa.wav
+INFO:voice_cloning_service:Saved temporary audio file: data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_7ce8264688274854ad1205707aa1a8aa.wav
+INFO:voice_cloning_service:Received inference request: project_id='Lex_Opp_Intro' character='SPEAKER_00' language='en' model_version='en_2025_01_02' model_name='SPEAKER_00_en' input_filenames=['data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_7ce8264688274854ad1205707aa1a8aa.wav'] callback_url=None export_format='WAV' f0_method='rmvpe' f0_up_key=0 filter_radius=3 rms_mix_rate=0.8 protect=0.5 index_rate=0.7 hop_length=128 clean_strength=0.7 split_audio=False clean_audio=True f0_autotune=False formant_shift=False formant_qfrency=1.0 formant_timbre=1.0 embedder_model='contentvec' embedder_model_custom='' post_process=False reverb=False pitch_shift=False limiter=False gain=False distortion=False chorus=False bitcrush=False clipping=False compressor=False delay=False reverb_room_size=0.5 reverb_damping=0.5 reverb_wet_gain=0.0 reverb_dry_gain=0.0 reverb_width=1.0 reverb_freeze_mode=0.0 pitch_shift_semitones=0.0 limiter_threshold=-1.0 limiter_release_time=0.05 gain_db=0.0 distortion_gain=0.0 chorus_rate=1.5 chorus_depth=0.1 chorus_center_delay=15.0 chorus_feedback=0.25 chorus_mix=0.5 bitcrush_bit_depth=4 clipping_threshold=0.5 compressor_threshold=-20.0 compressor_ratio=4.0 compressor_attack=0.001 compressor_release=0.1 delay_seconds=0.1 delay_feedback=0.5 delay_mix=0.5
+INFO:voice_cloning_service:Model SPEAKER_00_en found locally.
+Converting audio 'data/infer_Lex_Opp_Intro_en_SPEAKER_00/temp_7ce8264688274854ad1205707aa1a8aa.wav'...
+Conversion completed at 'outputs/temp_7ce8264688274854ad1205707aa1a8aa_converted.wav' in 2.58 seconds.
+INFO:voice_cloning_service: inference output_paths: ['outputs/temp_7ce8264688274854ad1205707aa1a8aa_converted.wav']
+INFO:voice_cloning_service: convert_to_voice, output_paths: ['outputs/temp_7ce8264688274854ad1205707aa1a8aa_converted.wav']
+INFO:voice_cloning_service:upload file, output_paths: ['outputs/temp_7ce8264688274854ad1205707aa1a8aa_converted.wav']
+INFO:voice_cloning_service:file uploaded
+INFO:voice_cloning_service:filename: Lex_Opp_Intro/SPEAKER_00/es/2.3_4.01_SPEAKER_00_2025-01-04T05_33_58_564025.wav, url: https://storage.googleapis.com/video-dub-e0a3e.appspot.com/Lex_Opp_Intro/SPEAKER_00/es/2.3_4.01_SPEAKER_00_2025-01-04T05_33_58_564025.wav, audio_length: 2.188, trimmed_start: 0.13, trimmed_end: 0.32
+Inference complete. Output file at: outputs/temp_7ce8264688274854ad1205707aa1a8aa_converted.wav
+INFO:     185.187.130.137:63088 - "POST /convert_voice HTTP/1.1" 200 OK
+WARNING:  Unsupported upgrade request.
+WARNING:  No supported WebSocket library detected. Please use "pip install 'uvicorn[standard]'", or install 'websockets' or 'wsproto' manually.
+WARNING:  Invalid HTTP request received.
+INFO:     198.235.24.14:52114 - "GET / HTTP/1.0" 404 Not Found
+INFO:     205.210.31.159:61110 - "GET / HTTP/1.1" 404 Not Found
+INFO:     198.235.24.246:54290 - "GET / HTTP/1.0" 404 Not Found
+WARNING:  Unsupported upgrade request.
+WARNING:  No supported WebSocket library detected. Please use "pip install 'uvicorn[standard]'", or install 'websockets' or 'wsproto' manually.
+WARNING:  Invalid HTTP request received.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4874]
