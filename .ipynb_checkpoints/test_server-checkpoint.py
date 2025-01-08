@@ -13,6 +13,7 @@ app = FastAPI(title="Test Client Server", version="1.0")
 MAIN_SERVER_URL = "http://localhost:8000"
 RECEIVED_CALLBACKS = []  # store callbacks received from main server
 
+
 class TestTrainRequest(BaseModel):
     client_id: str = "test_client"
     project_id: str = "test_project"
@@ -21,6 +22,7 @@ class TestTrainRequest(BaseModel):
     model_name: str = "TestModel"
     callback_url: Optional[str] = "http://localhost:9000/callback"
     total_epoch: int = 5
+
 
 class TestInferRequest(BaseModel):
     client_id: str = "test_client"
@@ -34,6 +36,7 @@ class TestInferRequest(BaseModel):
     f0_up_key: int = 5
     export_format: str = "WAV"
 
+
 @app.post("/test_train")
 def test_train(req: TestTrainRequest):
     payload = req.dict()
@@ -44,6 +47,7 @@ def test_train(req: TestTrainRequest):
     resp = requests.post(f"{MAIN_SERVER_URL}/train", json=payload)
     return {"status_code": resp.status_code, "response": resp.json()}
 
+
 @app.post("/test_infer")
 def test_infer(req: TestInferRequest):
     payload = req.dict()
@@ -51,12 +55,14 @@ def test_infer(req: TestInferRequest):
     resp = requests.post(f"{MAIN_SERVER_URL}/infer", json=payload)
     return {"status_code": resp.status_code, "response": resp.json()}
 
+
 @app.post("/callback")
 async def callback_endpoint(request: Request):
     data = await request.json()
     logger.info(f"Received callback from main server: {data}")
     RECEIVED_CALLBACKS.append(data)
     return {"status": "ok"}
+
 
 @app.get("/callbacks")
 def get_callbacks():

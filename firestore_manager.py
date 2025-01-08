@@ -1,10 +1,14 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
+
 # Setup credentials
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "video-dub-e0a3e-firebase-adminsdk-in18v-ec7f75c563.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
+    "video-dub-e0a3e-firebase-adminsdk-in18v-ec7f75c563.json"
+)
 
 import logging
+
 # Setup Logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("voice_cloning_service")
@@ -14,33 +18,29 @@ class FirestoreManager:
     def __init__(self, bucket_name: str, credentials_path: str):
         if not firebase_admin._apps:
             cred = credentials.Certificate(credentials_path)
-            initialize_app(cred, {
-                'storageBucket': bucket_name
-            })
-            
+            initialize_app(cred, {"storageBucket": bucket_name})
+
         self.db = firestore.Client()
-    
-#     def update_character_model_path(self, project_id, character, model_path):
-#         self.db = firestore.Client()
 
-#         # Fetch the project document
-#         project_ref = self.db.collection("Projects").document(project_id)
-#         project_data = project_ref.get().to_dict()
+    #     def update_character_model_path(self, project_id, character, model_path):
+    #         self.db = firestore.Client()
 
-#         if not project_data or "characters" not in project_data:
-#             raise ValueError("Project or characters data not found in Firestore")
+    #         # Fetch the project document
+    #         project_ref = self.db.collection("Projects").document(project_id)
+    #         project_data = project_ref.get().to_dict()
 
-#         # Update the model_path for the matching character
-#         for char in project_data["characters"]:
-#             if char.get("speaker") == character:
-#                 char["model_path"] = model_path
+    #         if not project_data or "characters" not in project_data:
+    #             raise ValueError("Project or characters data not found in Firestore")
 
-#         # Update Firestore
-#         project_ref.update({"characters": project_data["characters"]})
-#         logger.info(f"Updated Firestore with model path: {model_path} for character: {character}")
+    #         # Update the model_path for the matching character
+    #         for char in project_data["characters"]:
+    #             if char.get("speaker") == character:
+    #                 char["model_path"] = model_path
 
-        
-        
+    #         # Update Firestore
+    #         project_ref.update({"characters": project_data["characters"]})
+    #         logger.info(f"Updated Firestore with model path: {model_path} for character: {character}")
+
     def update_character_model_path(self, project_id, character, model_path):
         projects_ref = self.db.collection("Projects")
         query = projects_ref.where("name", "==", project_id).limit(1)
@@ -50,15 +50,15 @@ class FirestoreManager:
         # for doc in results:
         #     project_snapshot = doc  # Firestore document snapshot
         #     break
-        
+
         for doc in results:
             doc_ref = projects_ref.document(doc.id)  # Create the document reference
             doc_ref, doc  # Return both reference and snapshot
             break
-            
+
         project_ref = doc_ref
         project_snapshot = doc
-            
+
         # # Fetch the project document
         # project_ref = self.db.collection("Projects").document(project_id)
         # project_snapshot = project_ref.get()
@@ -82,9 +82,15 @@ class FirestoreManager:
                 break
 
         if not character_updated:
-            logger.error(f"Character with speaker '{character}' not found in project {project_id}.")
-            raise ValueError(f"Character with speaker '{character}' not found in project {project_id}.")
+            logger.error(
+                f"Character with speaker '{character}' not found in project {project_id}."
+            )
+            raise ValueError(
+                f"Character with speaker '{character}' not found in project {project_id}."
+            )
 
         # Update Firestore
         project_ref.update({"characters": project_data["characters"]})
-        logger.info(f"Updated Firestore with model path: {model_path} for character: {character}")
+        logger.info(
+            f"Updated Firestore with model path: {model_path} for character: {character}"
+        )

@@ -204,8 +204,8 @@ def preprocess_training_set(
 
     files = []
     idx = 0
-    print('Dataset directory: ', input_root)
-    
+    print("Dataset directory: ", input_root)
+
     for root, _, filenames in os.walk(input_root):
         try:
             sid = 0 if root == input_root else int(os.path.basename(root))
