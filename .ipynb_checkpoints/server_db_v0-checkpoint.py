@@ -9,11 +9,17 @@ from pydantic import BaseModel
 from pathlib import Path
 
 from firebase_storage_manager_db_v0 import CloudStorageManager
-from firestore_manager import FirestoreManager # contains firestore util functions
-from rvc_training import preprocess_dataset, extract_features, train_model, create_index, download_model as train_download_model
+from firestore_manager import FirestoreManager  # contains firestore util functions
+from rvc_training import (
+    preprocess_dataset,
+    extract_features,
+    train_model,
+    create_index,
+    download_model as train_download_model,
+)
 from rvc_inference import run_inference
 
-        
+
 # Add these imports at the top of server_db_v0.py
 from fastapi import Request, HTTPException, Query
 from io import BytesIO
@@ -34,7 +40,9 @@ from typing import Optional
 # Configuration
 # -----------------------
 BUCKET_NAME = os.environ.get("CLOUD_BUCKET_NAME", "video-dub-e0a3e.appspot.com")
-CREDENTIALS_PATH = os.environ.get("FIREBASE_CREDENTIALS", "video-dub-e0a3e-firebase-adminsdk-in18v-ec7f75c563.json")
+CREDENTIALS_PATH = os.environ.get(
+    "FIREBASE_CREDENTIALS", "video-dub-e0a3e-firebase-adminsdk-in18v-ec7f75c563.json"
+)
 LOCAL_DATA_DIR = Path("data")
 LOCAL_LOGS_DIR = Path("logs")
 LOCAL_MODEL_CACHE_MAX = 20  # max number of models to keep locally
@@ -51,9 +59,14 @@ logger = logging.getLogger("voice_cloning_service")
 # -----------------------
 # Initialize Cloud Storage Manager
 # -----------------------
-storage_manager = CloudStorageManager(bucket_name=BUCKET_NAME, credentials_path=CREDENTIALS_PATH)
+storage_manager = CloudStorageManager(
+    bucket_name=BUCKET_NAME, credentials_path=CREDENTIALS_PATH
+)
 
-firestore_manager = FirestoreManager(bucket_name=BUCKET_NAME, credentials_path=CREDENTIALS_PATH)
+firestore_manager = FirestoreManager(
+    bucket_name=BUCKET_NAME, credentials_path=CREDENTIALS_PATH
+)
+
 
 # -----------------------
 # Utility Functions
@@ -70,60 +83,85 @@ def prune_model_cache():
         shutil.rmtree(model_dirs[i])
         logger.info(f"Removed old model cache directory: {model_dirs[i].name}")
 
+
 def model_exists_locally(model_name: str) -> bool:
     model_path = LOCAL_LOGS_DIR / model_name
     return model_path.exists()
 
-def download_model_from_cloud(project_id: str, language: str, character: str, model_version: str, model_name: str):
+
+def download_model_from_cloud(
+    project_id: str, language: str, character: str, model_version: str, model_name: str
+):
     """Download model files from cloud storage to local logs directory."""
     target_dir = LOCAL_LOGS_DIR / model_name
     target_dir.mkdir(exist_ok=True, parents=True)
-    
-    model_files = storage_manager.list_model_files(project_id, language, character, model_version=model_version)
+
+    model_files = storage_manager.list_model_files(
+        project_id, language, character, model_version=model_version
+    )
     for mf in model_files:
-        storage_manager.download_model(str(target_dir), project_id, language, character, model_version, mf)
+        storage_manager.download_model(
+            str(target_dir), project_id, language, character, model_version, mf
+        )
     logger.info(f"Downloaded model {model_name} ({model_version}) from cloud storage.")
     prune_model_cache()
 
-def upload_model_to_cloud(project_id: str, language: str, character: str, model_version: str, model_name: str):
+
+def upload_model_to_cloud(
+    project_id: str, language: str, character: str, model_version: str, model_name: str
+):
     """Upload trained model files to cloud storage."""
     model_path = LOCAL_LOGS_DIR / model_name
     for f in model_path.iterdir():
         if f.is_file():
-            storage_manager.upload_model(str(f), project_id, language, character, model_version)
+            storage_manager.upload_model(
+                str(f), project_id, language, character, model_version
+            )
     logger.info(f"Uploaded model {model_name} ({model_version}) to cloud storage.")
 
-def download_audio_files(project_id: str, language: str, character: str, filenames: List[str]) -> Path:
+
+def download_audio_files(
+    project_id: str, language: str, character: str, filenames: List[str]
+) -> Path:
     """Download specific audio files for the dataset from cloud storage."""
     try:
         dataset_dir = LOCAL_DATA_DIR / f"{project_id}_{language}_{character}"
         logger.info(f"Creating dataset directory at: {dataset_dir}")
         dataset_dir.mkdir(parents=True, exist_ok=True)
-        
-        logger.info(f"""
+
+        logger.info(
+            f"""
         Starting download of {len(filenames)} files:
         Project ID: {project_id}
         Language: {language}
         Character: {character}
         First few filenames: {filenames[:3]}
         Target directory: {dataset_dir}
-        """)
-        
+        """
+        )
+
         for i, filename in enumerate(filenames):
             try:
                 logger.info(f"Downloading file {i+1}/{len(filenames)}: {filename}")
-                storage_manager.download_audio(str(dataset_dir), project_id, language, character, filename)
+                storage_manager.download_audio(
+                    str(dataset_dir), project_id, language, character, filename
+                )
             except Exception as e:
                 logger.error(f"Failed to download file {filename}: {str(e)}")
                 raise
-        
-        logger.info(f"Successfully downloaded {len(filenames)} audio files to {dataset_dir}")
+
+        logger.info(
+            f"Successfully downloaded {len(filenames)} audio files to {dataset_dir}"
+        )
         return dataset_dir
     except Exception as e:
         logger.error(f"Failed in download_audio_files: {str(e)}")
         raise
 
-def upload_inference_results(output_paths: List[str], project_id: str, language: str, character: str) -> List[str]:
+
+def upload_inference_results(
+    output_paths: List[str], project_id: str, language: str, character: str
+) -> List[str]:
     """Upload inference results to cloud storage and return the blob paths."""
     uploaded_paths = []
     for p in output_paths:
@@ -132,13 +170,17 @@ def upload_inference_results(output_paths: List[str], project_id: str, language:
     logger.info(f"Uploaded {len(output_paths)} inference results to cloud storage.")
     return uploaded_paths
 
+
 def send_callback(webhook_url: str, data: dict):
     """Send a callback to the provided webhook URL with given data."""
     try:
         resp = requests.post(webhook_url, json=data, timeout=10)
-        logger.info(f"Callback POST to {webhook_url} completed with status {resp.status_code}.")
+        logger.info(
+            f"Callback POST to {webhook_url} completed with status {resp.status_code}."
+        )
     except Exception as e:
         logger.error(f"Failed to send callback to {webhook_url}: {e}")
+
 
 # -----------------------
 # Request Models
@@ -152,7 +194,7 @@ class TrainRequest(BaseModel):
     model_name: str
     audio_filenames: List[str]  # List of audio files to use for training
     callback_url: Optional[str] = None
-    
+
     # Preprocessing parameters
     dataset_sample_rate: int = 40000
     preprocess_cpu_cores: int = 2
@@ -160,7 +202,7 @@ class TrainRequest(BaseModel):
     process_effects: bool = False
     noise_reduction: bool = False
     noise_reduction_strength: float = 0.7
-    
+
     # Feature extraction parameters
     rvc_version: str = "v2"
     f0_method: str = "rmvpe"
@@ -169,9 +211,9 @@ class TrainRequest(BaseModel):
     extract_gpu: int = 0
     embedder_model: str = "contentvec"
     embedder_model_custom: str = ""
-    
+
     # Training parameters
-    total_epoch: int = 50 #20
+    total_epoch: int = 50  # 20
     batch_size: int = 15
     gpu: int = 0
     pretrained: bool = True
@@ -187,6 +229,7 @@ class TrainRequest(BaseModel):
     save_every_weights: bool = False
     index_algorithm: str = "Auto"
 
+
 class InferenceRequest(BaseModel):
     # Identifying info
     # client_id: str  # Kept for backwards compatibility but not used in paths
@@ -197,7 +240,7 @@ class InferenceRequest(BaseModel):
     model_name: str
     input_filenames: List[str]
     callback_url: Optional[str] = None
-    
+
     # Inference parameters
     export_format: str = "WAV"
     f0_method: str = "rmvpe"
@@ -216,7 +259,7 @@ class InferenceRequest(BaseModel):
     formant_timbre: float = 1.0
     embedder_model: str = "contentvec"
     embedder_model_custom: str = ""
-    
+
     # Post-processing effects
     post_process: bool = False
     reverb: bool = False
@@ -229,7 +272,7 @@ class InferenceRequest(BaseModel):
     clipping: bool = False
     compressor: bool = False
     delay: bool = False
-    
+
     reverb_room_size: float = 0.5
     reverb_damping: float = 0.5
     reverb_wet_gain: float = 0.0
@@ -265,10 +308,12 @@ class InferenceRequest(BaseModel):
     delay_feedback: float = 0.5
     delay_mix: float = 0.5
 
+
 # -----------------------
 # Server Initialization
 # -----------------------
 app = FastAPI(title="Voice Cloning Service", version="1.0")
+
 
 # -----------------------
 # Endpoints
@@ -277,22 +322,21 @@ app = FastAPI(title="Voice Cloning Service", version="1.0")
 def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
     print(f"Received training request: {req}")
     logger.info(f"Received training request: {req}")
-    
+
     print("Debug - Request details:")
     print(f"Project ID: {req.project_id}")
     print(f"Language: {req.language}")
     print(f"Character: {req.character}")
     print(f"Audio filenames type: {type(req.audio_filenames)}")
     print(f"Audio filenames: {req.audio_filenames}")
-    
+
     if not req.audio_filenames:
-        return {
-            "status": "error",
-            "message": "No audio files provided for training"
-        }
-        
+        return {"status": "error", "message": "No audio files provided for training"}
+
     model_version = f"{req.language}_{datetime.date.today().strftime('%Y_%m_%d')}"
-    dataset_dir = download_audio_files(req.project_id, req.language, req.character, req.audio_filenames)
+    dataset_dir = download_audio_files(
+        req.project_id, req.language, req.character, req.audio_filenames
+    )
 
     def run_training_task():
         try:
@@ -305,9 +349,9 @@ def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
                 cut_preprocess=req.cut_preprocess,
                 process_effects=req.process_effects,
                 noise_reduction=req.noise_reduction,
-                noise_reduction_strength=req.noise_reduction_strength
+                noise_reduction_strength=req.noise_reduction_strength,
             )
-            
+
             # Extract features
             extract_features(
                 model_name=req.model_name,
@@ -318,9 +362,9 @@ def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
                 cpu_cores=req.extract_cpu_cores,
                 gpu=req.extract_gpu,
                 embedder_model=req.embedder_model,
-                embedder_model_custom=req.embedder_model_custom
+                embedder_model_custom=req.embedder_model_custom,
             )
-            
+
             # Train
             train_model(
                 model_name=req.model_name,
@@ -339,59 +383,87 @@ def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
                 cache_data_in_gpu=req.cache_data_in_gpu,
                 save_every_epoch=req.save_every_epoch,
                 save_only_latest=req.save_only_latest,
-                save_every_weights=req.save_every_weights
+                save_every_weights=req.save_every_weights,
             )
-            
+
             # Create index
-            create_index(req.model_name, rvc_version=req.rvc_version, index_algorithm=req.index_algorithm)
-            
+            create_index(
+                req.model_name,
+                rvc_version=req.rvc_version,
+                index_algorithm=req.index_algorithm,
+            )
+
             # Upload model
-            upload_model_to_cloud(req.project_id, req.language, req.character, model_version, req.model_name)
-            
-            model_path_storage = f"{req.language}/{req.character}/{model_version}/{req.model_name}"
-            logging.info(f"upload model_path: {model_path_storage}, project_id: {req.project_id}, character: {req.character}")
-            firestore_manager.update_character_model_path(req.project_id, req.character, model_path_storage)
+            upload_model_to_cloud(
+                req.project_id,
+                req.language,
+                req.character,
+                model_version,
+                req.model_name,
+            )
+
+            model_path_storage = (
+                f"{req.language}/{req.character}/{model_version}/{req.model_name}"
+            )
+            logging.info(
+                f"upload model_path: {model_path_storage}, project_id: {req.project_id}, character: {req.character}"
+            )
+            firestore_manager.update_character_model_path(
+                req.project_id, req.character, model_path_storage
+            )
             # firestore_manager.update_character_model_path(project_id, character, model_path)
-            
+
             # if req.callback_url:
-                # send_callback(req.callback_url, {
-                #     "status": "completed",
-                #     "message": f"Training complete for {req.model_name}",
-                #     "project_id": req.project_id,
-                #     "language": req.language,
-                #     "character": req.character,
-                #     "model_version": model_version,
-                #     "model_name": req.model_name
-                # })
+            # send_callback(req.callback_url, {
+            #     "status": "completed",
+            #     "message": f"Training complete for {req.model_name}",
+            #     "project_id": req.project_id,
+            #     "language": req.language,
+            #     "character": req.character,
+            #     "model_version": model_version,
+            #     "model_name": req.model_name
+            # })
         except Exception as e:
             logger.error(f"Training task failed: {e}")
             if req.callback_url:
-                send_callback(req.callback_url, {
-                    "status": "error",
-                    "message": f"Training failed for {req.model_name}: {str(e)}"
-                })
+                send_callback(
+                    req.callback_url,
+                    {
+                        "status": "error",
+                        "message": f"Training failed for {req.model_name}: {str(e)}",
+                    },
+                )
 
     background_tasks.add_task(run_training_task)
     return {
         "status": "accepted",
         "message": f"Training started for {req.model_name}",
-        "results_location": f"{req.project_id}/{req.language}/{req.character}/models/{model_version}/"
+        "results_location": f"{req.project_id}/{req.language}/{req.character}/models/{model_version}/",
     }
+
 
 @app.post("/infer")
 def inference_endpoint(req: InferenceRequest, background_tasks: BackgroundTasks):
     logger.info(f"Received inference request: {req}")
-    
+
     # Ensure model is cached locally
     if not model_exists_locally(req.model_name):
         logger.info(f"Model {req.model_name} not found locally, downloading...")
-        download_model_from_cloud(req.project_id, req.language, req.character, req.model_version, req.model_name)
+        download_model_from_cloud(
+            req.project_id,
+            req.language,
+            req.character,
+            req.model_version,
+            req.model_name,
+        )
     else:
         logger.info(f"Model {req.model_name} found locally.")
 
     # Download input files
-    input_paths = req.input_filenames #[]
-    input_dir = LOCAL_DATA_DIR / f"infer_{req.project_id}_{req.language}_{req.character}"
+    input_paths = req.input_filenames  # []
+    input_dir = (
+        LOCAL_DATA_DIR / f"infer_{req.project_id}_{req.language}_{req.character}"
+    )
     # input_dir.mkdir(exist_ok=True, parents=True)
     # for fn in req.input_filenames:
     #     local_path = storage_manager.download_audio(str(input_dir), req.project_id, req.language, req.character, fn)
@@ -401,7 +473,10 @@ def inference_endpoint(req: InferenceRequest, background_tasks: BackgroundTasks)
         try:
             output_paths = []
             for inp in input_paths:
-                output_path = str(LOCAL_OUTPUT_DIR / (Path(inp).stem + "_converted." + req.export_format.lower()))
+                output_path = str(
+                    LOCAL_OUTPUT_DIR
+                    / (Path(inp).stem + "_converted." + req.export_format.lower())
+                )
                 run_inference(
                     model_name=req.model_name,
                     input_path=inp,
@@ -458,10 +533,10 @@ def inference_endpoint(req: InferenceRequest, background_tasks: BackgroundTasks)
                     compressor_release=req.compressor_release,
                     delay_seconds=req.delay_seconds,
                     delay_feedback=req.delay_feedback,
-                    delay_mix=req.delay_mix
+                    delay_mix=req.delay_mix,
                 )
                 output_paths.append(output_path)
-            
+
             ### handle the uploading outside the inference function
             # logger.info(f"output_paths: {output_paths}")
             # uploaded_files = upload_inference_results(output_paths, req.project_id, req.language, req.character)
@@ -471,9 +546,9 @@ def inference_endpoint(req: InferenceRequest, background_tasks: BackgroundTasks)
             #         "message": "Inference completed",
             #         "uploaded_files": uploaded_files
             #     })
-            
+
             logger.info(f" inference output_paths: {output_paths}")
-                
+
             return output_paths
         except Exception as e:
             logger.error(f"Inference task failed: {e}")
@@ -494,10 +569,6 @@ def inference_endpoint(req: InferenceRequest, background_tasks: BackgroundTasks)
     # }
 
 
-
-
-
-
 # Additions
 
 
@@ -505,68 +576,79 @@ from firebase_admin import firestore
 from fastapi import HTTPException
 from typing import List, Dict
 
-async def fetch_training_data_from_firestore(project_id: str, callback_url: str) -> List[TrainRequest]:
+
+async def fetch_training_data_from_firestore(
+    project_id: str, callback_url: str
+) -> List[TrainRequest]:
     """
     Fetches project data from Firestore and constructs training requests for each character
-    
+
     Args:
         project_id: The ID of the project in Firestore
-        
+
     Returns:
         List of TrainRequest objects for each character with sufficient audio samples
     """
     try:
         # Initialize Firestore client
         db = firestore.client()
-        
+
         # Get project document
-        project_doc = db.collection('Projects').document(project_id).get()
+        project_doc = db.collection("Projects").document(project_id).get()
         if not project_doc.exists:
-            raise HTTPException(status_code=404, message=f"Project {project_id} not found")
-            
+            raise HTTPException(
+                status_code=404, message=f"Project {project_id} not found"
+            )
+
         project_data = project_doc.to_dict()
-        characters = project_data.get('characters', [])
-        project_name = project_data.get('name')
-        original_lang = project_data.get('orginalLang')
-        
+        characters = project_data.get("characters", [])
+        project_name = project_data.get("name")
+        original_lang = project_data.get("orginalLang")
+
         if not characters:
-            raise HTTPException(status_code=400, message="No characters found in project")
-            
+            raise HTTPException(
+                status_code=400, message="No characters found in project"
+            )
+
         training_requests = []
-        
+
         # Process each character
         for speaker in characters:
             # Query high-quality audio samples
-            dialogue_ref = (db.collection('Projects')
-                          .document(project_id)
-                          .collection('Dialogue')
-                          .where('originalAudioRating', 'in', [4, 5])
-                          .where('speaker', '==', speaker.get('speaker'))
-                          .stream())
-            
+            dialogue_ref = (
+                db.collection("Projects")
+                .document(project_id)
+                .collection("Dialogue")
+                .where("originalAudioRating", "in", [4, 5])
+                .where("speaker", "==", speaker.get("speaker"))
+                .stream()
+            )
+
             # Collect audio files
             audio_files = []
             for doc in dialogue_ref:
                 doc_data = doc.to_dict()
-                if original_audio := doc_data.get('originalAudio'):
+                if original_audio := doc_data.get("originalAudio"):
                     # Extract filename from URL
-                    filename = original_audio.split('/')[-1]
+                    filename = original_audio.split("/")[-1]
                     audio_files.append(filename)
-            
+
             # Skip if insufficient samples
             if len(audio_files) < 1:  # Change to 10 in production
-                logger.warning(f"Skipping {speaker.get('speaker')}: insufficient samples ({len(audio_files)})")
+                logger.warning(
+                    f"Skipping {speaker.get('speaker')}: insufficient samples ({len(audio_files)})"
+                )
                 continue
-                
+
             # Limit to 30 samples
             audio_files = audio_files[:30]
-            
+
             # Create training request
             model_name = f"{speaker.get('speaker')}_{original_lang}"
-            
+
             train_request = TrainRequest(
                 project_id=project_name,
-                character=speaker.get('speaker'),
+                character=speaker.get("speaker"),
                 language=original_lang,
                 model_name=model_name,
                 audio_filenames=audio_files,
@@ -574,73 +656,71 @@ async def fetch_training_data_from_firestore(project_id: str, callback_url: str)
                 total_epoch=100,
                 # Using default values for all other training parameters
             )
-            
+
             training_requests.append(train_request)
-            
+
         return training_requests
-        
+
     except Exception as e:
         logger.error(f"Error fetching training data from Firestore: {str(e)}")
-        raise HTTPException(status_code=500, message=f"Failed to fetch training data: {str(e)}")
+        raise HTTPException(
+            status_code=500, message=f"Failed to fetch training data: {str(e)}"
+        )
+
 
 @app.post("/train-from-firestore/{project_id}")
 async def train_from_firestore(
-    project_id: str, 
+    project_id: str,
     background_tasks: BackgroundTasks,
-    callback_url: Optional[str] = Query("http://localhost:4001/api/services/callBackQueueUpdateVoiceTraining")
+    callback_url: Optional[str] = Query(
+        "http://localhost:4001/api/services/callBackQueueUpdateVoiceTraining"
+    ),
 ):
 
-# @app.route('/train-from-firestore', methods=['POST'])
-# def train_from_firestore():
-#     data = request.get_json()    
-#     project_id = data['project_id'] #data['url']
-    
+    # @app.route('/train-from-firestore', methods=['POST'])
+    # def train_from_firestore():
+    #     data = request.get_json()
+    #     project_id = data['project_id'] #data['url']
+
     """
     Endpoint that fetches training data from Firestore and initiates training for all eligible characters
     """
     try:
         # Fetch training requests
-        training_requests = await fetch_training_data_from_firestore(project_id, callback_url)
-        
+        training_requests = await fetch_training_data_from_firestore(
+            project_id, callback_url
+        )
+
         if not training_requests:
             return {
                 "status": "error",
-                "message": "No eligible characters found for training"
+                "message": "No eligible characters found for training",
             }
-        
+
         # Start training for each character
         results = []
         for train_req in training_requests:
             result = train_endpoint(train_req, background_tasks)
-            results.append({
-                "character": train_req.character,
-                "status": result["status"],
-                "message": result["message"],
-                "results_location": result.get("results_location")
-            })
-        
+            results.append(
+                {
+                    "character": train_req.character,
+                    "status": result["status"],
+                    "message": result["message"],
+                    "results_location": result.get("results_location"),
+                }
+            )
+
         return {
             "status": "accepted",
             "message": f"Training initiated for {len(results)} characters",
-            "results": results
+            "results": results,
         }
-        
+
     except HTTPException as e:
         raise e
     except Exception as e:
         logger.error(f"Error in train_from_firestore: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
-
-
-
-
-
-        
-        
-        
-        
-        
 
 
 # Add these new request models
@@ -653,6 +733,7 @@ class DialogueData(BaseModel):
     voiceId2: Optional[str] = None
     languageCode: str
 
+
 class VoiceConversionRequest(BaseModel):
     flag: int = 0
     dialogue: DialogueData
@@ -660,14 +741,21 @@ class VoiceConversionRequest(BaseModel):
     baseDirectory: str
     silence_thresh: float = -40
     padding: int = 80
-    
+
+
 # Add these utility functions
-def trim_leading_trailing_silence(audio_segment: AudioSegment, silence_thresh: float = -40, padding_ms: int = 80) -> tuple:
+def trim_leading_trailing_silence(
+    audio_segment: AudioSegment, silence_thresh: float = -40, padding_ms: int = 80
+) -> tuple:
     """Trim silence from the beginning and end of the audio."""
+
     def detect_leading_silence(sound):
         trim_ms = 0
         chunk_size = 10
-        while trim_ms < len(sound) and sound[trim_ms:trim_ms+chunk_size].dBFS < silence_thresh:
+        while (
+            trim_ms < len(sound)
+            and sound[trim_ms : trim_ms + chunk_size].dBFS < silence_thresh
+        ):
             trim_ms += chunk_size
         return trim_ms
 
@@ -680,46 +768,46 @@ def trim_leading_trailing_silence(audio_segment: AudioSegment, silence_thresh: f
 
     return audio_segment[start_trim:end_trim], start_trim, end_trim
 
+
 def generate_tts(text: str, voice_id: str, api_key: str) -> AudioSegment:
     """Generate text-to-speech audio using ElevenLabs API"""
     response = requests.post(
-        f'https://api.elevenlabs.io/v1/text-to-speech/{voice_id}',
+        f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
         json={
-            'text': text,
-            'model_id': 'eleven_multilingual_v2',
-            'voice_settings': {
-                'stability': 0.5,
-                'similarity_boost': 0.5,
+            "text": text,
+            "model_id": "eleven_multilingual_v2",
+            "voice_settings": {
+                "stability": 0.5,
+                "similarity_boost": 0.5,
             },
         },
         headers={
-            'Accept': 'audio/mpeg',
-            'Content-Type': 'application/json',
-            'xi-api-key': api_key,
+            "Accept": "audio/mpeg",
+            "Content-Type": "application/json",
+            "xi-api-key": api_key,
         },
         stream=True,
     )
 
     if response.status_code != 200:
-        raise HTTPException(status_code=500, detail=f"Failed to generate audio: {response.text}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to generate audio: {response.text}"
+        )
 
     return AudioSegment.from_file(BytesIO(response.content), format="mp3")
 
 
-
-
-
-
-
-
-
-def download_model_data(project_id: str, language: str, character: str, model_name: str, model_version: str):
+def download_model_data(
+    project_id: str, language: str, character: str, model_name: str, model_version: str
+):
     # logger.info(f"Received inference request: {req}")
 
     # Ensure model is cached locally
     if not model_exists_locally(model_name):
         logger.info(f"Model {model_name} not found locally, downloading...")
-        download_model_from_cloud(project_id, language, character, model_version, model_name)
+        download_model_from_cloud(
+            project_id, language, character, model_version, model_name
+        )
     else:
         logger.info(f"Model {model_name} found locally.")
 
@@ -732,73 +820,71 @@ def download_model_data(project_id: str, language: str, character: str, model_na
     #     input_paths.append(local_path)
 
 
-        
-        
-        
-        
-        
-        
-async def convert_to_voice(audio_segment: AudioSegment, project_id: str, language: str, character: str, 
-                         model_name: str, model_version: str) -> AudioSegment:
+async def convert_to_voice(
+    audio_segment: AudioSegment,
+    project_id: str,
+    language: str,
+    character: str,
+    model_name: str,
+    model_version: str,
+) -> AudioSegment:
     """Convert audio using local inference endpoint instead of ElevenLabs"""
     temp_filename = None
     try:
         download_model_data(project_id, language, character, model_name, model_version)
-        
+
         # Verify model files exist
-        model_dir = LOCAL_LOGS_DIR / model_name  # This will be logs/SPEAKER_00_en_20e_80s/
+        model_dir = (
+            LOCAL_LOGS_DIR / model_name
+        )  # This will be logs/SPEAKER_00_en_20e_80s/
         logger.info(f"Checking model directory: {model_dir}")
-        
+
         if not model_dir.exists():
             raise ValueError(f"Model directory not found: {model_dir}")
-        
+
         # List existing files in model directory
-        existing_files = list(model_dir.glob('*'))
+        existing_files = list(model_dir.glob("*"))
         logger.info(f"Files found in model directory: {existing_files}")
-        
+
         # Check for required model files
         # Note: model_version parameter might be the .pth file name
-        model_files = list(model_dir.glob('G_*.pth'))
+        model_files = list(model_dir.glob("G_*.pth"))
         if not model_files:
             raise ValueError(f"No model weights file found in {model_dir}")
-        
+
         #### the inference function already handles the .index file and .npy file
         # index_file = model_dir / "added.index"
         # if not index_file.exists():
         #     raise ValueError(f"Index file not found: {index_file}")
-            
+
         # feature_file = model_dir / "total_fea.npy"
         # if not feature_file.exists():
         #     raise ValueError(f"Feature file not found: {feature_file}")
-            
+
         logger.info(f"Found all required model files in {model_dir}")
 
-        
         # # Rest of the function remains the same...
         # # Save audio to temporary file
         # with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
         #     audio_segment.export(temp_file.name, format="wav")
         #     temp_filename = temp_file.name
-            
-            
+
         ### modified here
-        
-        
+
         import tempfile
         import uuid
-        
+
         # save the input audio to local path
         input_dir = LOCAL_DATA_DIR / f"infer_{project_id}_{language}_{character}"
         logger.info(f"input_dir is {input_dir}")
         input_dir.mkdir(exist_ok=True, parents=True)
-            
+
         # with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
         random_name = f"temp_{uuid.uuid4().hex}.wav"
         logger.info(f"random_name is {random_name}")
-        temp_filename = os.path.join(input_dir, random_name) #temp_file.name
+        temp_filename = os.path.join(input_dir, random_name)  # temp_file.name
         audio_segment.export(temp_filename, format="wav")
         logger.info(f"saved temp file to path {temp_filename}")
-        
 
         logger.info(f"Saved temporary audio file: {temp_filename}")
 
@@ -808,11 +894,11 @@ async def convert_to_voice(audio_segment: AudioSegment, project_id: str, languag
             character=character,
             language=language,
             model_version=model_version,  # This should be the .pth file name
-            model_name=model_name,        # This should be the directory name
+            model_name=model_name,  # This should be the directory name
             input_filenames=[temp_filename],
             f0_method="rmvpe",
             protect=0.5,
-            clean_audio=True
+            clean_audio=True,
         )
 
         ##### no need to upload the temp file then download it
@@ -825,10 +911,10 @@ async def convert_to_voice(audio_segment: AudioSegment, project_id: str, languag
             def __init__(self):
                 self.tasks = []
                 self.errors = []
-            
+
             def add_task(self, func, *args, **kwargs):
                 self.tasks.append((func, args, kwargs))
-            
+
             def run_all(self):
                 for task, args, kwargs in self.tasks:
                     try:
@@ -836,58 +922,61 @@ async def convert_to_voice(audio_segment: AudioSegment, project_id: str, languag
                     except Exception as e:
                         self.errors.append(str(e))
                 if self.errors:
-                    raise Exception(f"Background tasks failed: {'; '.join(self.errors)}")
+                    raise Exception(
+                        f"Background tasks failed: {'; '.join(self.errors)}"
+                    )
 
         # Run inference
         background_tasks = SyncBackgroundTasks()
         # response = inference_endpoint(inference_req, background_tasks)
         output_paths = inference_endpoint(inference_req, background_tasks)
-        
+
         logger.info(f" convert_to_voice, output_paths: {output_paths}")
-        
-#         if response["status"] != "accepted":
-#             raise ValueError(f"Inference failed: {response.get('message', 'Unknown error')}")
-        
-#         logger.info(f"Inference response: {response}")
+
+        #         if response["status"] != "accepted":
+        #             raise ValueError(f"Inference failed: {response.get('message', 'Unknown error')}")
+
+        #         logger.info(f"Inference response: {response}")
         background_tasks.run_all()
-        
+
         return output_paths
-        
-#         # Wait for processing
-#         await asyncio.sleep(5)
-        
-#         # Check for output file
-#         output_filename = f"{os.path.basename(temp_filename).rsplit('.', 1)[0]}_converted.wav"
-#         output_blob = storage_manager.bucket.blob(f"{project_id}/{language}/{character}/{output_filename}")
-        
-#         retry_count = 0
-#         max_retries = 3
-#         while retry_count < max_retries:
-#             if output_blob.exists():
-#                 break
-#             retry_count += 1
-#             logger.info(f"Output file not ready, waiting... (attempt {retry_count}/{max_retries})")
-#             await asyncio.sleep(2)
-            
-#         if not output_blob.exists():
-#             raise FileNotFoundError(f"Output file never appeared in storage: {output_filename}")
-            
-#         # Download converted file
-#         converted_path = storage_manager.download_audio(
-#             str(LOCAL_OUTPUT_DIR),
-#             project_id,
-#             language,
-#             character,
-#             output_filename
-#         )
-        
-#         logger.info(f"Downloaded converted audio to: {converted_path}")
-#         return AudioSegment.from_wav(converted_path)
-        
+
+    #         # Wait for processing
+    #         await asyncio.sleep(5)
+
+    #         # Check for output file
+    #         output_filename = f"{os.path.basename(temp_filename).rsplit('.', 1)[0]}_converted.wav"
+    #         output_blob = storage_manager.bucket.blob(f"{project_id}/{language}/{character}/{output_filename}")
+
+    #         retry_count = 0
+    #         max_retries = 3
+    #         while retry_count < max_retries:
+    #             if output_blob.exists():
+    #                 break
+    #             retry_count += 1
+    #             logger.info(f"Output file not ready, waiting... (attempt {retry_count}/{max_retries})")
+    #             await asyncio.sleep(2)
+
+    #         if not output_blob.exists():
+    #             raise FileNotFoundError(f"Output file never appeared in storage: {output_filename}")
+
+    #         # Download converted file
+    #         converted_path = storage_manager.download_audio(
+    #             str(LOCAL_OUTPUT_DIR),
+    #             project_id,
+    #             language,
+    #             character,
+    #             output_filename
+    #         )
+
+    #         logger.info(f"Downloaded converted audio to: {converted_path}")
+    #         return AudioSegment.from_wav(converted_path)
+
     except Exception as e:
         logger.error(f"Error in convert_to_voice: {str(e)}", exc_info=True)
         raise
-        
+
+
 ##### uncomment to clean temp files
 #     finally:
 #         if temp_filename and os.path.exists(temp_filename):
@@ -898,15 +987,12 @@ async def convert_to_voice(audio_segment: AudioSegment, project_id: str, languag
 #                 logger.warning(f"Failed to cleanup temporary file {temp_filename}: {str(e)}")
 
 
-
-
-        
 # Add the new endpoint
 @app.post("/convert_voice")
 async def convert_voice(request: VoiceConversionRequest):
     try:
         dialogue = request.dialogue
-        
+
         if request.flag not in [0, 1]:
             raise HTTPException(status_code=400, detail="Invalid flag value")
 
@@ -915,56 +1001,60 @@ async def convert_voice(request: VoiceConversionRequest):
             audio_content = generate_tts(
                 text=dialogue.translatedText,
                 voice_id=dialogue.voiceId,
-                api_key=request.elevenLabKey
+                api_key=request.elevenLabKey,
             )
-            
+
             trimmed_audio, start_trim, end_trim = trim_leading_trailing_silence(
                 audio_content, request.silence_thresh, request.padding
             )
-            
+
             trimmed_from_start_secs = start_trim / 1000
             trimmed_from_end_secs = (len(audio_content) - end_trim) / 1000
 
         # Case 2: Text-to-speech then voice conversion (flag = 1)
         elif request.flag == 1:
             if not dialogue.voiceId2:
-                raise HTTPException(status_code=400, detail="Missing second voice ID for conversion")
+                raise HTTPException(
+                    status_code=400, detail="Missing second voice ID for conversion"
+                )
 
             # First generate audio with ElevenLabs
             initial_audio = generate_tts(
                 text=dialogue.translatedText,
                 voice_id=dialogue.voiceId,
-                api_key=request.elevenLabKey
+                api_key=request.elevenLabKey,
             )
-            
+
             # Trim silence
             trimmed_audio, start_trim, end_trim = trim_leading_trailing_silence(
                 initial_audio, request.silence_thresh, request.padding
             )
-            
+
             # Extract model info from voiceId2
             # Format should be: "project_id/language/character/model_version/weights_file"
-            voice_parts = dialogue.voiceId2.split('/')
+            voice_parts = dialogue.voiceId2.split("/")
             if len(voice_parts) != 5:
                 raise HTTPException(status_code=400, detail="Invalid voiceId2 format")
-                
+
             project_id, language, character, model_version, weights_file = voice_parts
-            
+
             # Construct the model name from components
             # The model directory name should match the base name of the weights file
-            model_name = weights_file.replace('.pth', '')
-            if model_name.startswith('G_'):
+            model_name = weights_file.replace(".pth", "")
+            if model_name.startswith("G_"):
                 model_name = model_name[2:]  # Remove 'G_' prefix if present
-                
-            logger.info(f"""Model parameters:
+
+            logger.info(
+                f"""Model parameters:
                 Project ID: {project_id}
                 Language: {language}
                 Character: {character}
                 Model Name: {model_name}
                 Model Version: {model_version}
                 Weights File: {weights_file}
-            """)
-            
+            """
+            )
+
             # Convert using local inference
             output_paths = await convert_to_voice(
                 trimmed_audio,
@@ -972,45 +1062,42 @@ async def convert_voice(request: VoiceConversionRequest):
                 language,
                 character,
                 model_name,
-                model_version
+                model_version,
             )
-            
+
             trimmed_from_start_secs = start_trim / 1000
             trimmed_from_end_secs = (len(initial_audio) - end_trim) / 1000
 
-            
-           
-        
-#         # # Generate filename
-#         # filenamePrefix = f"{dialogue.speaker}/{dialogue.start}_{dialogue.end}_{dialogue.speaker}"
-#         # timestamp = datetime.datetime.now().isoformat().replace(':', '_').replace('.', '_')
-#         # filename = f"{request.baseDirectory}/{filenamePrefix}_{timestamp}.wav"
+        #         # # Generate filename
+        #         # filenamePrefix = f"{dialogue.speaker}/{dialogue.start}_{dialogue.end}_{dialogue.speaker}"
+        #         # timestamp = datetime.datetime.now().isoformat().replace(':', '_').replace('.', '_')
+        #         # filename = f"{request.baseDirectory}/{filenamePrefix}_{timestamp}.wav"
 
-#         # Save to a bytes buffer to upload
-#         trimmed_buffer = BytesIO()
-#         # audio = AudioSegment.from_file(audio_path, format="wav")
-#         trimmed_audio.export(trimmed_buffer, format="wav")
-#         trimmed_buffer.seek(0)
+        #         # Save to a bytes buffer to upload
+        #         trimmed_buffer = BytesIO()
+        #         # audio = AudioSegment.from_file(audio_path, format="wav")
+        #         trimmed_audio.export(trimmed_buffer, format="wav")
+        #         trimmed_buffer.seek(0)
 
-        
-#         audio = AudioSegment.from_file(output_paths[0], format="wav")
+        #         audio = AudioSegment.from_file(output_paths[0], format="wav")
 
-#         # Upload to storage
-#         blob = storage_manager.bucket.blob(filename)
-#         blob.upload_from_file(trimmed_buffer, content_type='audio/wav')
-#         blob.make_public()
-#         public_url = blob.public_url
+        #         # Upload to storage
+        #         blob = storage_manager.bucket.blob(filename)
+        #         blob.upload_from_file(trimmed_buffer, content_type='audio/wav')
+        #         blob.make_public()
+        #         public_url = blob.public_url
 
-        
         # dialogue.languageCode
-        
+
         # dialogue
-        
+
         # Generate filename
         filenamePrefix = f"{dialogue.speaker}/{dialogue.languageCode}/{dialogue.start}_{dialogue.end}_{dialogue.speaker}"
-        timestamp = datetime.datetime.now().isoformat().replace(':', '_').replace('.', '_')
+        timestamp = (
+            datetime.datetime.now().isoformat().replace(":", "_").replace(".", "_")
+        )
         filename = f"{request.baseDirectory}/{filenamePrefix}_{timestamp}.wav"
-        
+
         # audio = AudioSegment.from_file(ouptut_paths[0], format="wav")
         # print("Audio loaded successfully (optional step)")
 
@@ -1023,10 +1110,11 @@ async def convert_voice(request: VoiceConversionRequest):
         logger.info("file uploaded")
         # Return the public URL of the uploaded file
         public_url = blob.public_url
-        
-        logger.info(f"filename: {filename}, url: {public_url}, audio_length: {len(trimmed_audio) / 1000}, trimmed_start: {trimmed_from_start_secs}, trimmed_end: {trimmed_from_end_secs}")
-        
-        
+
+        logger.info(
+            f"filename: {filename}, url: {public_url}, audio_length: {len(trimmed_audio) / 1000}, trimmed_start: {trimmed_from_start_secs}, trimmed_end: {trimmed_from_end_secs}"
+        )
+
         return {
             "filename": filename,
             "url": public_url,
@@ -1034,7 +1122,6 @@ async def convert_voice(request: VoiceConversionRequest):
             "trimmed_start": trimmed_from_start_secs,
             "trimmed_end": trimmed_from_end_secs,
         }
-
 
         # return jsonify({
         #     "filename": filename,
@@ -1049,30 +1136,7 @@ async def convert_voice(request: VoiceConversionRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=5000)
